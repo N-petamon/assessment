@@ -13,14 +13,14 @@ userNameInput.onkeydown = event => {
 assessmentButton.onclick = () => {
   const userName = userNameInput.value;
   if (userName.length === 0) {
-    // ���O����̎��͏������I������
+    // 名前が空の時は処理を終了する
     return;
   }
 
-  // �f�f���ʕ\���G���A�̍쐬
+  // 診断結果表示エリアの作成
   resultDivided.innerText = "";
   const header = document.createElement('h3');
-  header.innerText = '�f�f����';
+  header.innerText = '診断結果';
   resultDivided.appendChild(header);
 
   const paragraph = document.createElement('p');
@@ -28,57 +28,58 @@ assessmentButton.onclick = () => {
   paragraph.innerText = result;
   resultDivided.appendChild(paragraph);
 
-  // �c�C�[�g�G���A�̍쐬
+  // ツイートエリアの作成
   tweetDivided.innerText = "";
   const anchor = document.createElement('a');
   const hrefValue =
     'https://twitter.com/intent/tweet?button_hashtag=' +
-    encodeURIComponent('���Ȃ��̂����Ƃ���') +
+    encodeURIComponent('あなたのいいところ') +
     '&ref_src=twsrc%5Etfw';
   anchor.setAttribute('href', hrefValue);
   anchor.className = 'twitter-hashtag-button';
   anchor.setAttribute('data-text', result);
-  anchor.innerText = 'Tweet #���Ȃ��̂����Ƃ���';
+  anchor.innerText = 'Tweet #あなたのいいところ';
   tweetDivided.appendChild(anchor);
 
-  // widgets.js �̐ݒ�
+  // widgets.js の設定
   const script = document.createElement('script');
   script.setAttribute('src', 'https://platform.twitter.com/widgets.js');
   tweetDivided.appendChild(script);
 };
 
 const answers = [
-  '{userName}�̂����Ƃ���͐��ł��B{userName}�̓����I�Ȑ��݂͂Ȃ��䂫���A�S�Ɏc��܂��B',
-  '{userName}�̂����Ƃ���͂܂Ȃ����ł��B{userName}�Ɍ��߂�ꂽ�l�́A�C�ɂȂ��Ďd�����Ȃ��ł��傤�B',
-  '{userName}�̂����Ƃ���͏�M�ł��B{userName}�̏�M�Ɏ���̐l�͊�������܂��B',
-  '{userName}�̂����Ƃ���͌������ł��B{userName}�̌����������̂��Ƃ����������ɓ����܂��B',
-  '{userName}�̂����Ƃ���͒m���ł��B������{userName}�𑽂��̐l������ɂ��Ă��܂��B',
-  '{userName}�̂����Ƃ���̓��j�[�N���ł��B{userName}�����̂��̓������F���y���������܂��B',
-  '{userName}�̂����Ƃ���͗p�S�[���ł��B{userName}�̓��@�ɁA�����̐l���������܂��B',
-  '{userName}�̂����Ƃ���͌����ڂł��B����������o��{userName}�̗ǂ��ɊF���C���䂩��܂��B',
-  '{userName}�̂����Ƃ���͌��f�͂ł��B{userName}�����錈�f�ɂ�����������l�����܂��B',
-  '{userName}�̂����Ƃ���͎v�����ł��B{userName}�ɋC�������Ă�����������̐l�����ӂ��Ă��܂��B',
-  '{userName}�̂����Ƃ���͊��󐫂ł��B{userName}�����������ƂɊF���������A�킩�肠�����Ƃ��ł��܂��B',
-  '{userName}�̂����Ƃ���͐ߓx�ł��B���������Ȃ�{userName}�̍l���ɊF�����ӂ��Ă��܂��B',
-  '{userName}�̂����Ƃ���͍D��S�ł��B�V�������ƂɌ������Ă���{userName}�̐S�\���������̐l�ɖ��͓I�ɉf��܂��B',
-  '{userName}�̂����Ƃ���͋C�z��ł��B{userName}�̔z���������̐l���~���Ă��܂��B',
-  '{userName}�̂����Ƃ���͂��̑S�Ăł��B����̂܂܂�{userName}���g�������Ƃ���Ȃ̂ł��B',
-  '{userName}�̂����Ƃ���͎����S�ł��B��΂��Ǝv�����Ƃ��ɂ�������ƏՓ���}������{userName}���F����]������Ă��܂��B'
+  '{userName}のいいところは声です。{userName}の特徴的な声は皆を惹きつけ、心に残ります。',
+  '{userName}のいいところはまなざしです。{userName}に見つめられた人は、気になって仕方がないでしょう。',
+  '{userName}のいいところは情熱です。{userName}の情熱に周りの人は感化されます。',
+  '{userName}のいいところは厳しさです。{userName}の厳しさがものごとをいつも成功に導きます。',
+  '{userName}のいいところは知識です。博識な{userName}を多くの人が頼りにしています。',
+  '{userName}のいいところはユニークさです。{userName}だけのその特徴が皆を楽しくさせます。',
+  '{userName}のいいところは用心深さです。{userName}の洞察に、多くの人が助けられます。',
+  '{userName}のいいところは見た目です。内側から溢れ出る{userName}の良さに皆が気を惹かれます。',
+  '{userName}のいいところは決断力です。{userName}がする決断にいつも助けられる人がいます。',
+  '{userName}のいいところは思いやりです。{userName}に気をかけてもらった多くの人が感謝しています。',
+  '{userName}のいいところは感受性です。{userName}が感じたことに皆が共感し、わかりあうことができます。',
+  '{userName}のいいところは節度です。強引すぎない{userName}の考えに皆が感謝しています。',
+  '{userName}のいいところは好奇心です。新しいことに向かっていく{userName}の心構えが多くの人に魅力的に映ります。',
+  '{userName}のいいところは気配りです。{userName}の配慮が多くの人を救っています。',
+  '{userName}のいいところはその全てです。ありのままの{userName}自身がいいところなのです。',
+  '{userName}のいいところは自制心です。やばいと思ったときにしっかりと衝動を抑えられる{userName}が皆から評価されています。',
+  '{userName}のいいところは優しさです。{userName}の優しい雰囲気や立ち振る舞いに多くの人が癒やされています。'
 ];
 
 /**
- * ���O�̕������n���Ɛf�f���ʂ�Ԃ��֐�
- * @param {string} userName ���[�U�[�̖��O
- * @return {string} �f�f����
+ * 名前の文字列を渡すと診断結果を返す関数
+ * @param {string} userName ユーザーの名前
+ * @return {string} 診断結果
  */
 function assessment(userName) {
-  // �S�����̃R�[�h�ԍ����擾���Ă���𑫂����킹��
+  // 全文字のコード番号を取得してそれを足し合わせる
   let sumOfCharCode = 0;
   for (let i = 0; i < userName.length; i++) {
     sumOfCharCode = sumOfCharCode + userName.charCodeAt(i);
   }
 
-  // �����̃R�[�h�ԍ��̍��v���񓚂̐��Ŋ����ēY���̐��l�����߂�
+  // 文字のコード番号の合計を回答の数で割って添字の数値を求める
   const index = sumOfCharCode % answers.length;
   let result = answers[index];
 
@@ -86,13 +87,13 @@ function assessment(userName) {
   return result;
 }
 
-// �e�X�g�R�[�h
+// テストコード
 console.assert(
-  assessment('���Y') ===
-    '���Y�̂����Ƃ���͌��f�͂ł��B���Y�����錈�f�ɂ�����������l�����܂��B',
-  '�f�f���ʂ̕����̓���̕����𖼑O�ɒu�������鏈��������������܂���B'
+  assessment('太郎') ===
+    '太郎のいいところは決断力です。太郎がする決断にいつも助けられる人がいます。',
+  '診断結果の文言の特定の部分を名前に置き換える処理が正しくありません。'
 );
 console.assert(
-  assessment('���Y') === assessment('���Y'),
-  '���͂��������O�Ȃ瓯���f�f���ʂ��o�͂��鏈��������������܂���B'
+  assessment('太郎') === assessment('太郎'),
+  '入力が同じ名前なら同じ診断結果を出力する処理が正しくありません。'
 );
